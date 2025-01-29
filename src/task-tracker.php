@@ -16,13 +16,14 @@ if(empty($argv)){
 // get the command
 $command = $argv[0]; // add/update/delete
 
-$description = $argv[1];
 
 $taskManager = new TaskManager();
 
 switch ($command) {
 
     case 'add':
+
+        $description = $argv[1];
 
         if (isset($description) && is_string($description)) {
             $task = $taskManager->create($description);
@@ -34,10 +35,38 @@ switch ($command) {
         break;
 
     case 'update':
-        var_dump($action);
+
+        // argument task_id not provided
+        if(!isset($argv[1])){
+            echo "Please provide task_id like: update 1, update 2. \n";
+            exit();
+        }
+
+        // argument task_name not provided
+        if(!isset($argv[2])){
+            echo " !!! Please provide task name. !!! \n";
+            exit();
+        }
+
+        if(isset($argv[2]) && !is_string($argv[2])){
+            echo "Task name is not type of string. \n";
+            exit();
+        }
+
+        $task_id = $argv[1];
+
+        $task_name = $argv[2];
+
+        $task = $taskManager->updateTask($task_id,$task_name);
+
+        echo $task;
+    
+        // echo " !!! Unable to update task. !!! \n";
+        
 
     default:
-        # code...
-        break;
+        // echo "Invalid command input. see instructions below \n ";
+        // echo "Usage: php task-tracker.php [add|list|complete] [arguments]\n";
+    break;
 }
 

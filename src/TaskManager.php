@@ -32,6 +32,40 @@ class TaskManager
         return $task;
     }
 
+    public function updateTask(int $task_id,string $task_name)
+    {
+        $updatedTasks = [];
+        // find the task.
+        $task = null;
+        foreach($this->tasks as $item){
+            if($item['id'] === $task_id){
+                $task = $item;
+            }
+        }
+
+        // if task doesn't exists return error
+        if(is_null($task)){
+            return "!!! task does not exists (invalid task_id) !!! \n";
+        }
+
+        // update the task
+        foreach($this->tasks as $item){
+            if($item['id'] === $task_id){
+                $item['description'] = $task_name;
+                $task = $item;
+            }
+
+            array_push($updatedTasks,$item);
+
+        }
+
+        $this->tasks = $updatedTasks;
+
+        file_put_contents($this->file_path,json_encode($this->tasks,JSON_PRETTY_PRINT));
+        
+        return "Task with updated successfully" ;
+    }
+
     public function getTasks()
     {
         $this->createJsonStorageFile();
