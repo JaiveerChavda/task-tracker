@@ -74,6 +74,7 @@ class TaskManager
         foreach($this->tasks as $item){
             if($item['id'] === $task_id){
                 $item['description'] = $task_name;
+                $item['updated_at'] = date('d-m-Y H:i:s');
                 $task = $item;
             }
 
