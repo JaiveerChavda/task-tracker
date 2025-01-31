@@ -60,6 +60,7 @@ switch ($command) {
         $task = $taskManager->updateTask($task_id,$task_name);
 
         echo $task;
+        break;
     
     case 'list':
         $taskManager->list('show all tasks');
