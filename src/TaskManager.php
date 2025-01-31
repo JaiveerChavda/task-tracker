@@ -44,14 +44,14 @@ class TaskManager
     public function list(string $title,string $type = null)
     {
         echo "$title \n";
-        echo "+------+---------------------------+-----------------+ \n";
-        echo "| ID   | Description               | Status          |\n";
-        echo "+------+---------------------------+-----------------+ \n";
+        echo "+------+-------------------------------------------+-----------------------+-----------------------+-----------------+ \n";
+        echo "| ID   | Description                               | Created at            | Updated at            | Status          |\n";
+        echo "+------+-------------------------------------------+-----------------------+-----------------------+-----------------+ \n";
         foreach ($this->tasks as  $task) {
-            printf("| %-4d | %-25s | %-15s |\n", $task['id'], $task['description'], $task['status'] );
-        }
-
-        echo "+------+---------------------------+-----------------+ \n";
+            printf("| %-4d | %-41s | %-21s | %-21s | %-15s |\n", $task['id'], $task['description'], $task['created_at'], $task['updated_at'] ?? "-", $task['status']);
+        };
+    
+        echo "+------+-------------------------------------------+-----------------------+-----------------------+-----------------+ \n";
     }
 
     public function updateTask(int $task_id,string $task_name)
