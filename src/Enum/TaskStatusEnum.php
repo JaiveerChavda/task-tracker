@@ -4,7 +4,7 @@ namespace App\Enum;
 enum TaskStatusEnum: string
 {
     case Done = 'done';
-    case Inprogress = 'In-progress';
+    case Inprogress = 'in-progress';
     case Todo = 'todo';
 }
 ?>

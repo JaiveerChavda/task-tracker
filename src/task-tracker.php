@@ -2,6 +2,7 @@
 
 require 'vendor/autoload.php';
 
+use App\Enum\TaskStatusEnum;
 use App\TaskManager;
 
 // remove file name
@@ -14,7 +15,7 @@ if(empty($argv)){
 }
 
 // get the command
-$command = $argv[0]; // add/update/delete
+$command = $argv[0]; // add/update/delete/list
 
 
 $taskManager = new TaskManager();
@@ -63,9 +64,28 @@ switch ($command) {
         break;
     
     case 'list':
-        $taskManager->list('show all tasks');
+
+        // filter task list by status like: list todo, list completed
+
+        // check status
+        if(isset($argv[1])){
+            $status = $argv[1];
+
+            // validate status is a valid task status
+            $is_valid_status = in_array($status,array_column(TaskStatusEnum::cases(),'value'));
+
+            if(!$is_valid_status){
+                echo "!!! Please enter valid status filter. ex: todo|done|in-progress !!! \n";
+                die();
+            }
+
+            // query task using status filter - @TODO
+
+        }else{
+            $taskManager->list('show all tasks');
+        }
+
         break;
-        // echo $tasks;
 
     default:
         // echo "Invalid command input. see instructions below \n ";
