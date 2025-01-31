@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Enum\TaskStatusEnum;
 use Exception;
 class TaskManager
 {
@@ -23,13 +24,32 @@ class TaskManager
         $id = count($this->tasks);
         $task = new Task(description:$description);
         $task->id = $id + 1;
-        $task->is_completed = false;
+        $task->status = TaskStatusEnum::Todo->value;
 
         array_push($this->tasks,$task);
 
         file_put_contents($this->file_path,json_encode($this->tasks,JSON_PRETTY_PRINT));
 
         return $task;
+    }
+
+    /**
+     * Get all the tasks
+     * 
+     * return array
+     */
+
+    public function list(string $title,string $type = null)
+    {
+        echo "$title \n";
+        echo "+------+---------------------------+-----------------+ \n";
+        echo "| ID   | Description               | Status          |\n";
+        echo "+------+---------------------------+-----------------+ \n";
+        foreach ($this->tasks as  $task) {
+            printf("| %-4d | %-25s | %-15s |\n", $task['id'], $task['description'], $task['status'] );
+        }
+
+        echo "+------+---------------------------+-----------------+ \n";
     }
 
     public function updateTask(int $task_id,string $task_name)

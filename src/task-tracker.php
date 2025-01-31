@@ -61,8 +61,10 @@ switch ($command) {
 
         echo $task;
     
-        // echo " !!! Unable to update task. !!! \n";
-        
+    case 'list':
+        $taskManager->list('show all tasks');
+        break;
+        // echo $tasks;
 
     default:
         // echo "Invalid command input. see instructions below \n ";
