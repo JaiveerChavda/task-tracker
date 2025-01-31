@@ -25,6 +25,8 @@ class TaskManager
         $task = new Task(description:$description);
         $task->id = $id + 1;
         $task->status = TaskStatusEnum::Todo->value;
+        $task->created_at = date('d-m-Y H:i:s');
+        $task->updated_at = date('d-m-Y H:i:s');
 
         array_push($this->tasks,$task);
 
