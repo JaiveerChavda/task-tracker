@@ -139,5 +139,33 @@ class TaskManager
         return true;        
         
     }
+
+    /**
+     * @param int $id
+     * delete a task
+     * @return string $response;
+     */
+
+    public function delete(int $id): string
+    {
+        $id -= 1;
+
+        if(!array_key_exists($id,$this->tasks)){
+            return "!!! task does not exists (invalid task_id) !!! \n";
+        }
+
+        foreach($this->tasks as $key => $task){
+            if($key === $id){
+                unset($this->tasks[$key]);
+            }
+        }
+
+        $this->tasks = array_values($this->tasks);
+
+        // update tasks.json file to reflect changes
+        file_put_contents($this->file_path,json_encode($this->tasks,JSON_PRETTY_PRINT));
+
+        return "Task Deleted Successfully \n";
+    }
 }
 ?>

@@ -10,7 +10,7 @@ array_shift($argv);
 
 // show cli error message if no proper task arguments is provided after file name
 if(empty($argv)){
-    echo "Usage: php task-tracker.php [add|list|complete] [arguments]\n";
+    echo "Usage: php task-tracker.php [add|list|update|delete] [arguments]\n";
     exit();
 }
 
@@ -88,10 +88,23 @@ switch ($command) {
         }
 
         break;
+    
+    case 'delete':
+
+        // argument task_id not provided
+        if(!isset($argv[1])){
+            echo "Please provide task_id like: delete 1, delete 2. \n";
+            exit();
+        }
+
+        echo $taskManager->delete($argv[1]);
+
+        break;
+
 
     default:
-        // echo "Invalid command input. see instructions below \n ";
-        // echo "Usage: php task-tracker.php [add|list|complete] [arguments]\n";
+        echo "Invalid command input. see instructions below \n ";
+        echo "Usage: php task-tracker.php [add|list|update|delete] [arguments]\n";
     break;
 }
 
