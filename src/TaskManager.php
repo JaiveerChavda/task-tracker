@@ -43,13 +43,31 @@ class TaskManager
 
     public function list(string $title,string $type = null)
     {
+        $noMoreTask = false;
+
+        // filter tasks by given type
+        if(!is_null($type)){
+            $this->tasks = array_filter($this->tasks, function ($task) use ($type) {
+                if($task['status'] === $type){
+                    return $task;
+                }
+            });
+        }
+
+        $noMoreTask = count($this->tasks) <= 0 ? true : false;
+
         echo "$title \n";
         echo "+------+-------------------------------------------+-----------------------+-----------------------+-----------------+ \n";
         echo "| ID   | Description                               | Created at            | Updated at            | Status          |\n";
         echo "+------+-------------------------------------------+-----------------------+-----------------------+-----------------+ \n";
-        foreach ($this->tasks as  $task) {
-            printf("| %-4d | %-41s | %-21s | %-21s | %-15s |\n", $task['id'], $task['description'], $task['created_at'], $task['updated_at'] ?? "-", $task['status']);
-        };
+        
+        if($noMoreTask){
+            printf("| %-100s               |\n","No more tasks to show");
+        }else{
+            foreach ($this->tasks as  $task) {
+                printf("| %-4d | %-41s | %-21s | %-21s | %-15s |\n", $task['id'], $task['description'], $task['created_at'], $task['updated_at'] ?? "-", $task['status']);
+            };
+        }
     
         echo "+------+-------------------------------------------+-----------------------+-----------------------+-----------------+ \n";
     }

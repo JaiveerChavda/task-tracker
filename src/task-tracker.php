@@ -79,6 +79,8 @@ switch ($command) {
                 die();
             }
 
+            $taskManager->list(title:"show all $status tasks",type: $status);
+
             // query task using status filter - @TODO
 
         }else{
