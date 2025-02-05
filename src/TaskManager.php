@@ -153,17 +153,25 @@ class TaskManager
 
     public function delete(int $id): string
     {
-        $id -= 1;
 
-        if(!array_key_exists($id,$this->tasks)){
+        foreach($this->tasks as $task){
+            if($task['id'] === $id){
+                $task_exists = true;
+            }
+        }
+            
+        if(!isset($task_exists)){
             return "!!! task does not exists (invalid task_id) !!! \n";
         }
 
         foreach($this->tasks as $key => $task){
-            if($key === $id){
-                unset($this->tasks[$key]);
+            if($task['id'] === $id){
+                $task_index = $key;
             }
         }
+
+        // remove the task
+        unset($this->tasks[$task_index]);
 
         $this->tasks = array_values($this->tasks);
 
