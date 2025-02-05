@@ -50,6 +50,7 @@ switch ($command) {
         // argument task_name not provided
         if(!isset($argv[2])){
             echo " !!! Please provide task name. !!! \n";
+            echo "for example: php task-tracker.php update 1 'new task name' \n";
             exit();
         }
 
