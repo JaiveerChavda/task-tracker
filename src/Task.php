@@ -1,7 +1,9 @@
 <?php
-namespace App;
+namespace src;
 
-use App\Enum\TaskStatusEnum;
+require_once __DIR__ . '/Enum/TaskStatusEnum.php';
+
+use src\Enum\TaskStatusEnum;
 class Task
 {
     public int $id = 0;

@@ -1,7 +1,12 @@
 <?php
-namespace App;
+namespace src;
 
-use App\Enum\TaskStatusEnum;
+require_once __DIR__ . '/Enum/TaskStatusEnum.php';
+require_once __DIR__ . '/Task.php';
+
+use src\Enum\TaskStatusEnum;
+use src\Task;
+
 use Exception;
 class TaskManager
 {

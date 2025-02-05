@@ -1,9 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
+require_once __DIR__ . '/TaskManager.php';
+require_once __DIR__ . '/Enum/TaskStatusEnum.php';
 
-use App\Enum\TaskStatusEnum;
-use App\TaskManager;
+use src\Enum\TaskStatusEnum;
+use src\TaskManager;
 
 // remove file name
 array_shift($argv);
