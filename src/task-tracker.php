@@ -25,15 +25,18 @@ switch ($command) {
 
     case 'add':
 
-        $description = $argv[1];
-
-        if (isset($description) && is_string($description)) {
+        // check if task name/description is provided ($argv[1] is task description)
+        if (isset($argv[1]) && is_string($argv[1])) {
+            $description = $argv[1];
             $task = $taskManager->create($description);
             echo "Task created successfully - $task->id \n";
             echo "Total tasks " . count($taskManager->tasks) . "\n";
             exit();
         }
+
         echo "please add task name!\n";
+        echo "for example: php task-tracker.php add 'task name' \n";
+
         break;
 
     case 'update':
