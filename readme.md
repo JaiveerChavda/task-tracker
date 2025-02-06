@@ -30,27 +30,36 @@
 > ⚠️ **Warning:** Make sure you run these commands in your project's root directory.
 
 ### Add a task
-
-` php src/task-tracker.php list`
+```php 
+php src/task-tracker.php add "<task-name>"
+```
 
 ### Edit a task
-
-` php src/task-tracker.php update <task-id> "<task-name>" `
+```php 
+php src/task-tracker.php update 1 "<task-name>"
+```
 
 ### Delete a task
-
-` php src/task-tracker.php delete <task-id>" `
+```php 
+php src/task-tracker.php delete 1
+```
 
 ### List all tasks
-
-` php src/task-tracker.php list" `
-
-### List completed tasks
-
-` php src/task-tracker.php list done" `
+```php 
+php src/task-tracker.php list
+```
+### List completed/done tasks
+```php 
+php src/task-tracker.php list done
+```
 
 ### List in-progress tasks
+```php 
+php src/task-tracker.php list in-progress
+```
 
-` php src/task-tracker.php list in-progress" `
+## Upcoming Features
 
-
+* Automated Tests (may be using pestPHP)
+* Designing command outputs with Termwind (for better UI).
+* phpStan for static analysis
