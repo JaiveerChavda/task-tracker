@@ -202,7 +202,7 @@ class TaskManager
 
         // update task status to in-progress
         $this->tasks = array_map(function ($task) use ($id) {
-            if($task['id'] === $id){
+            if ($task['id'] === $id) {
                 $task['status'] = TaskStatusEnum::Inprogress->value;
                 $task['updated_at'] = date('d-m-Y H:i:s');
             }
@@ -216,5 +216,41 @@ class TaskManager
         }
 
         return " Task marked as in-progress \n";
+    }
+
+    /**
+    * mark a task status as done(completed).
+    * @param int $id
+    * @return string
+    */
+
+    public function markDone(int $id): string
+    {
+        foreach ($this->tasks as $task) {
+            if ($task['id'] === $id) {
+                $task_exists = true;
+            }
+        }
+
+        if (!isset($task_exists)) {
+            return "!!! task does not exists (invalid task_id) !!! \n";
+        }
+
+        // update task status to done
+        $this->tasks = array_map(function ($task) use ($id) {
+            if ($task['id'] === $id) {
+                $task['status'] = TaskStatusEnum::Done->value;
+                $task['updated_at'] = date('d-m-Y H:i:s');
+            }
+            return $task;
+        }, $this->tasks);
+
+        $response = file_put_contents($this->file_path, json_encode($this->tasks, JSON_PRETTY_PRINT));
+
+        if (!$response) {
+            return "!!! unable to perform this operation !!! \n";
+        }
+
+        return " Task marked as done \n";
     }
 }

@@ -118,6 +118,18 @@ switch ($command) {
 
         break;
 
+    case 'mark-done':
+
+        // argument task_id not provided
+        if (!isset($argv[1])) {
+            echo "Please provide task_id like: mark-done 1, mark-done 2. \n";
+            exit();
+        }
+
+        echo $taskManager->markDone($argv[1]);
+
+        break;
+
     default:
         echo "Invalid command input. see instructions below \n ";
         echo "Usage: php task-tracker.php [add|list|update|delete] [arguments]\n";
