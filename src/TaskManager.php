@@ -202,7 +202,10 @@ class TaskManager
 
         // update task status to in-progress
         $this->tasks = array_map(function ($task) use ($id) {
-            $task['id'] === $id ? $task['status'] = TaskStatusEnum::Inprogress->value : '';
+            if($task['id'] === $id){
+                $task['status'] = TaskStatusEnum::Inprogress->value;
+                $task['updated_at'] = date('d-m-Y H:i:s');
+            }
             return $task;
         }, $this->tasks);
 
